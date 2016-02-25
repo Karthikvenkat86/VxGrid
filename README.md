@@ -4,7 +4,7 @@ An standalone native table plugin which uses the best of features provided by An
 
 ##Demo
 
-Sample Preview @ <a href="http://vxgrid.azurewebsites.net/">http://vxgrid.azurewebsites.net</a>
+Sample Preview @ <a href="http://vxgridfp.azurewebsites.net/">http://vxgridfp.azurewebsites.net</a>
 
 
 ##List of supported features (1.0.2)
