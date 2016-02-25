@@ -89,6 +89,7 @@
     <Content Include="dist\min\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\PublishProfiles\vxgrid - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\vxgrid - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\vxgridfp.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

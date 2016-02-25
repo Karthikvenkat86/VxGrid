@@ -56,10 +56,10 @@
             .vxSample.container {
                 /*height: calc(80vh - 60px);
                 margin: 10vh auto;*/
-                height:100%;
-                width:calc(100vw - 40px);
-                padding: 0 20px;
-                margin:0;
+                height: 100%;
+                width: 100%;
+                padding: 0 45px;
+                margin: 0;
             }
         }
 
@@ -74,21 +74,61 @@
         }
 
         .invalidField {
-            border:1px solid #bb0000 !important;
+            border: 1px solid #bb0000 !important;
         }
 
         .dtPickerClass {
             overflow: visible !important;
             padding: 0 10px !important;
         }
+
             .dtPickerClass p.input-group {
-                margin-bottom:0;
+                margin-bottom: 0;
             }
+
                 .dtPickerClass p.input-group input {
-                    border:none;
-                    padding:6px 0;
-                    box-shadow:none;
+                    border: none;
+                    padding: 6px 0;
+                    box-shadow: none;
                 }
+
+        .sidebar {
+            width: 25%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #0073c6;
+        }
+
+            .sidebar label {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 40px;
+                width: 100%;
+                padding: 25% 10%;
+                font-weight: 100;
+                text-align: center;
+                color: #fff;
+            }
+
+        .header {
+            height: 60px;
+            background: #f0f0f0;
+            width: 100%;
+            padding: 0;
+            margin-bottom:10px;
+        }
+
+            .header label {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: x-large;
+                width: 100%;
+                padding: 0 10%;
+                line-height: 60px;
+                font-weight: 100;
+                text-align: center;
+                color: #a0a0a0;
+            }
     </style>
 </head>
 <body ng-controller="vxSampleController as sample" style="height:100vh;">
@@ -99,8 +139,18 @@
         <button class="btn btn-primary sample" ng-click="sample.consoleLogData()">Console Log Data</button>
         <button class="btn btn-primary sample" ng-click="sample.openManageColumns()">Open Manage Columns</button>
     </div>
-    <div class="vxSample container" style="">
-        <vx-grid config="sample.vxSampleConfig" scroll-parent="'window'"></vx-grid>
+    <div class="col-xs-3" style="padding:0;">
+        <div class="sidebar">
+            <label>Static content here ...</label>
+        </div>
+    </div>
+    <div class="col-xs-9" style="padding:0;">
+        <div class="header">
+            <label>This header will scroll with body ...</label>
+        </div>
+        <div class="vxSample container" style="">
+            <vx-grid config="sample.vxSampleConfig" scroll-parent="'window'"></vx-grid>
+        </div>
     </div>
 </body>
 </html>
