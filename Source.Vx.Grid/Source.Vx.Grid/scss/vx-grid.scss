@@ -1,4 +1,34 @@
-﻿.vx-grid-related {
+﻿.vxGridManageColMod .modal-dialog {
+    height: 90vh;
+    width: 90%;
+    margin: 5vh auto;
+    border-radius: 0;
+
+    .modal-content {
+        height: 100%;
+        width: 100%;
+        border-radius: 0;
+        padding: 0 15px 15px 15px;
+
+        .modal-body {
+            height: 100%;
+            width: 100%;
+            border-radius: 0;
+            padding: 0;
+        }
+    }
+}
+
+.vx-grid-related {
+
+    .vx-scroller {
+        height: calc(100% - 60px);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        padding: 0;
+    }
+
     @media (max-width: 767px) {
         .vxTableContainer {
             padding: 0;
@@ -281,7 +311,8 @@
         .vxTableContainer:not(.scrollDupHeader) {
             padding: 0;
             margin: 3px 0 0 0;
-            overflow: auto;
+            overflow-x: hidden;
+            overflow-y: auto;
             height: calc(100%- 15px);
             -webkit-overflow-scrolling: touch;
             -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -338,11 +369,12 @@
 
         .vxTableContainer.attrPaneOpen {
             &:not(.scrollDupHeader) {
-                height: calc(100% - 60px);
+                height: 100%;
+                width: auto;
             }
 
             &.pageEnabled:not(.scrollDupHeader) {
-                height: calc(100% - 108px);
+                height: calc(100% - 48px);
             }
         }
 
@@ -559,10 +591,9 @@
                 filter: alpha(opacity = 100);
                 -webkit-transition: opacity 0.2s linear 0s;
                 transition: opacity 0.2s linear 0s;
-
-                &.attrPaneOpen {
+                /*&.attrPaneOpen {
                     top: 50px;
-                }
+                }*/
             }
 
             .vxTableHolder {
@@ -1436,27 +1467,6 @@
             margin-right: 20px;
             color: #303030;
             vertical-align: top;
-        }
-    }
-
-    .vxGridManageColMod .modal-dialog {
-        height: 90vh;
-        width: 90%;
-        margin: 5vh auto;
-        border-radius: 0;
-
-        .modal-content {
-            height: 100%;
-            width: 100%;
-            border-radius: 0;
-            padding: 0 15px 15px 15px;
-
-            .modal-body {
-                height: 100%;
-                width: 100%;
-                border-radius: 0;
-                padding: 0;
-            }
         }
     }
 

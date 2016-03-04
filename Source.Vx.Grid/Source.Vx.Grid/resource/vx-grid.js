@@ -226,8 +226,8 @@
                         if (typeof col === 'undefined' || col == null || col == {}) {
                             var _selColDefn = {
                                 id: 'checkbox', columnName: 'Row Selection', renderDefn: true, renderHeadDefn: true, ddSort: false, ddGroup: false, ddFilters: false, width: '50', locked: true,
-                                headerDefn: '<div class="vx-row-select"><input class="vx-row-select-toggle" type="checkbox" ng-model="vxColSettings.allRowSelected" ng-change="allRowSelectionChanged()" ng-disabled="vxColSettings.allRowSelectionDisabled" ng-if="vxConfig.allRowsSelectionEnabled" /></div>',
-                                cellDefn: '<div class="vx-row-select"><input class="vx-row-select-toggle" type="checkbox" ng-model="vxColSettings.rowSelected[VX_ROW_POINT]" ng-change="rowSelectionChanged(row)" ng-disabled="vxColSettings.vxRowSelectionDisable[VX_ROW_POINT]" /></div>'
+                                headerDefn: '<div class="vx-row-select"><input class="vx-row-select-toggle" tabindex="0" type="checkbox" ng-model="vxColSettings.allRowSelected" ng-change="allRowSelectionChanged()" ng-disabled="vxColSettings.allRowSelectionDisabled" ng-if="vxConfig.allRowsSelectionEnabled" /></div>',
+                                cellDefn: '<div class="vx-row-select"><input class="vx-row-select-toggle" tabindex="0" type="checkbox" ng-model="vxColSettings.rowSelected[VX_ROW_POINT]" ng-change="rowSelectionChanged(row)" ng-disabled="vxColSettings.vxRowSelectionDisable[VX_ROW_POINT]" /></div>'
                             };
                             $scope.vxConfig.columnDefConfigs.unshift(_selColDefn);
                         }
@@ -1280,6 +1280,11 @@
                         }
                     }
                 });
+
+                $scope.getvxTableContainerWidth = function () {
+                    var elem = angular.element($(element).find('.vx-scroller')[0]);
+                    return elem.width() + 'px';
+                }
 
                 var container = angular.element($(element).find('.scrollTableContainer')[0]);
                 container.on('scroll', function () {
