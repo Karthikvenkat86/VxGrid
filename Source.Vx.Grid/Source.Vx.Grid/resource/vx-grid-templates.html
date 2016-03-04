@@ -93,11 +93,11 @@
                                                     <input class="search-input" type="search" placeholder="Search In Filters" ng-model="vxColSettings.filterSearchToken[header.id]" />
                                                 </li>
                                                 <li role="presentation" class="filter" ng-if="vxColSettings.dropdDownLoaded[header.id] == true && vxColSettings.dropDownFilters[header.id] == true && filter.disabled == false" ng-repeat="filter in vxColSettings.colFilterPairs[header.id] | filter:vxColSettings.filterSearchToken[header.id]">
-                                                    <input class="filter-toggle" type="checkbox" ng-model="vxColSettings.colFiltersStatus[filter.key]" ng-change="filterClick(header, filter)" /><label class="filterItemTitle">{{filter.name}}</label>
+                                                    <input class="filter-toggle" type="checkbox" ng-model="vxColSettings.colFiltersStatus[filter.key]" ng-change="filterClick(header, filter)" /><label class="filterItemTitle"><span ng-if="filter.filterDefnAvailable == false">{{filter.name}}</span><span ng-if="filter.filterDefnAvailable == true" vx-compile="filter.filterDefn"></span></label>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div ng-if="header.renderDefn == true" vx-compile="header.headerDefn"></div>
+                                        <div ng-if="header.renderHeadDefn == true" vx-compile="header.headerDefn"></div>
                                     </th>
                                 </tr>
                             </thead>
@@ -135,10 +135,10 @@
                                 </tr>
                             </thead>
                             <tbody class="vxBody" vs-repeat vs-options="{latch: true}" vs-scroll-parent="{{scrollParent}}" vs-excess="{{vxColSettings.latchExcess}}" ng-class="{ 'revealWrap' : vxColSettings.revealWrapRowData }" ng-if="vxConfig.virtualization == true">
-                                <tr class="{{vxColSettings.vxRowClass[row[vxColSettings.primaryId]]}} vxBodyRow" ng-repeat="row in ( vxConfig.vxFilteredData = (vxConfig.vxData | filter:vxColSettings.xsSearch | vxGridMultiBoxFilters: multiBoxFilters | orderBy:vxColSettings.predicate:vxColSettings.reverse))" ng-class="{ 'vxRowSelected' : vxColSettings.rowSelected[row[vxColSettings.primaryId]]}">
+                                <tr vx-edit-focus-disable="vxColSettings.saveInProgress[row[vxColSettings.primaryId]]" ng-attr-id="{{row[vxColSettings.primaryId]}}" class="{{vxColSettings.vxRowClass[row[vxColSettings.primaryId]]}} vxBodyRow" ng-repeat="row in ( vxConfig.vxFilteredData = (vxConfig.vxData | filter:vxColSettings.xsSearch | vxGridMultiBoxFilters: multiBoxFilters | orderBy:vxColSettings.predicate:vxColSettings.reverse))" ng-class="{ 'vxRowSelected' : vxColSettings.rowSelected[row[vxColSettings.primaryId]], 'inProgress': vxColSettings.saveInProgress[row[vxColSettings.primaryId]]}">
                                     <td colspan="{{getNonHiddenColCount()}}" ng-if="row.fillEmptyElement == true" style="padding-left:15px;">No records to display ...</td>
                                     <td class="vxBodyRowCell {{header.colClass}}" ng-class="{'renderedDefn': header.renderDefn == true}" ng-repeat="header in vxConfig.columnDefConfigs" ng-style="{ 'width' : header.width + 'px' }" ng-if="header.hidden == false && row.type != 'groupRow' && vxColSettings.xsViewEnabled == false && !(row.fillEmptyElement == true)">
-                                        <span ng-if="(header.renderDefn == false && vxColSettings.inlineEditState[row[vxColSettings.primaryId]] != true) || (header.renderDefn == false && header.inlineEditOnColumnEnabled == false)">{{::row[header.id]}}</span>
+                                        <span ng-if="(header.renderDefn == false && vxColSettings.inlineEditState[row[vxColSettings.primaryId]] != true) || (header.renderDefn == false && header.inlineEditOnColumnEnabled == false)">{{row[header.id]}}</span>
                                         <div ng-if="(header.renderDefn == true && vxColSettings.inlineEditState[row[vxColSettings.primaryId]] != true) || (header.renderDefn == true && header.inlineEditOnColumnEnabled == false)" vx-compile-clone-link="header.cellDefn"></div>
                                         <div ng-if="vxColSettings.inlineEditState[row[vxColSettings.primaryId]] == true && header.inlineEditOnColumnEnabled == true" vx-compile-clone-link="header.editDefn"></div>
                                     </td>
@@ -164,7 +164,7 @@
                                             <div class="xsCellContent" ng-repeat="header in vxConfig.columnDefConfigs" ng-if="$index > 0 && header.xsHidden == false && row.type != 'groupRow'">
                                                 <div class="col-xs-12 xsCellHeader">{{header.columnName}}</div>
                                                 <div class="col-xs-12 xsCellValue">
-                                                    <span ng-if="header.renderDefn == false">{{::row[header.id]}}</span>
+                                                    <span ng-if="header.renderDefn == false">{{row[header.id]}}</span>
                                                     <div ng-if="header.renderDefn == true" vx-compile-clone-link="header.cellDefn"></div>
                                                 </div>
                                                 <div class="clearfix"></div>
@@ -174,10 +174,10 @@
                                 </tr>
                             </tbody>
                             <tbody class="vxBody" ng-class="{ 'revealWrap' : vxColSettings.revealWrapRowData }" ng-if="vxConfig.virtualization == false">
-                                <tr class="{{vxColSettings.vxRowClass[row[vxColSettings.primaryId]]}} vxBodyRow" ng-repeat="row in ( vxConfig.vxFilteredData = (vxConfig.vxData | filter:vxColSettings.xsSearch | vxGridMultiBoxFilters: multiBoxFilters | orderBy:vxColSettings.predicate:vxColSettings.reverse) | vxStartFrom: vxColSettings.vxPageStartPosition | limitTo:vxConfig.pageLength )" ng-class="{ 'vxRowSelected' : vxColSettings.rowSelected[row[vxColSettings.primaryId]]}">
+                                <tr vx-edit-focus-disable="vxColSettings.saveInProgress[row[vxColSettings.primaryId]]" ng-attr-id="{{row[vxColSettings.primaryId]}}" class="{{vxColSettings.vxRowClass[row[vxColSettings.primaryId]]}} vxBodyRow" ng-repeat="row in ( vxConfig.vxFilteredData = (vxConfig.vxData | filter:vxColSettings.xsSearch | vxGridMultiBoxFilters: multiBoxFilters | orderBy:vxColSettings.predicate:vxColSettings.reverse) | vxStartFrom: vxColSettings.vxPageStartPosition | limitTo:vxConfig.pageLength )" ng-class="{ 'vxRowSelected' : vxColSettings.rowSelected[row[vxColSettings.primaryId]], 'inProgress': vxColSettings.saveInProgress[row[vxColSettings.primaryId]]}">
                                     <td colspan="{{getNonHiddenColCount()}}" ng-if="row.fillEmptyElement == true" style="padding-left:15px;">No records to display ...</td>
                                     <td class="vxBodyRowCell {{header.colClass}}" ng-class="{'renderedDefn': header.renderDefn == true || (vxColSettings.inlineEditState[row[vxColSettings.primaryId]] == true && header.inlineEditOnColumnEnabled == true) }" ng-repeat="header in vxConfig.columnDefConfigs" ng-style="{ 'width' : header.width + 'px' }" ng-if="header.hidden == false && row.type != 'groupRow' && vxColSettings.xsViewEnabled == false && !(row.fillEmptyElement == true)">
-                                        <span ng-if="(header.renderDefn == false && vxColSettings.inlineEditState[row[vxColSettings.primaryId]] != true) || (header.renderDefn == false && header.inlineEditOnColumnEnabled == false)">{{::row[header.id]}}</span>
+                                        <span ng-if="(header.renderDefn == false && vxColSettings.inlineEditState[row[vxColSettings.primaryId]] != true) || (header.renderDefn == false && header.inlineEditOnColumnEnabled == false)">{{row[header.id]}}</span>
                                         <div ng-if="(header.renderDefn == true && vxColSettings.inlineEditState[row[vxColSettings.primaryId]] != true) || (header.renderDefn == true && header.inlineEditOnColumnEnabled == false)" vx-compile-clone-link="header.cellDefn"></div>
                                         <div ng-if="vxColSettings.inlineEditState[row[vxColSettings.primaryId]] == true && header.inlineEditOnColumnEnabled == true" vx-compile-clone-link="header.editDefn"></div>
                                     </td>
@@ -203,7 +203,7 @@
                                             <div class="xsCellContent" ng-repeat="header in vxConfig.columnDefConfigs" ng-if="$index > 0 && header.xsHidden == false && row.type != 'groupRow'">
                                                 <div class="col-xs-12 xsCellHeader">{{header.columnName}}</div>
                                                 <div class="col-xs-12 xsCellValue">
-                                                    <span ng-if="header.renderDefn == false">{{::row[header.id]}}</span>
+                                                    <span ng-if="header.renderDefn == false">{{row[header.id]}}</span>
                                                     <div ng-if="header.renderDefn == true" vx-compile-clone-link="header.cellDefn"></div>
                                                 </div>
                                                 <div class="clearfix"></div>
