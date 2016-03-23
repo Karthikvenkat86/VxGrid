@@ -26,6 +26,10 @@
     self.smapledt = new Date('01-02-2016');
     self.vxSampleData = [];
     self.showGrid = false;
+    self.validationMessage = 'lorem ipsum error error is some sample error.';
+    self.sampleInput = '';
+    self.sampleRequired = true;
+    self.sampleRegex = 'null';
     self.categories = [
         { 'id': '1', 'name': 'previsit' },
         { 'id': '2', 'name': 'onsite' },
@@ -707,6 +711,10 @@
                 else
                     rec.userAlias = null;
                 rec.mid = i + j;
+                rec.validationMessage = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+                rec.sampleRequired = true;
+                rec.sampleinput = 55;
+                rec.samplename = 'samplename';
                 _samples.push(rec);
             });
         });
@@ -765,7 +773,8 @@
         columnDefConfigs: [
             { id: 'dt', columnName: 'Date', renderDefn: true, ddSort: true, ddGroup: false, ddFilters: true, dropDownEnabled: true, width: '160', headerDefn: '<span>Date</span>', filterCellDefn: "<span>{{VX_DATA_POINT |  date:'yyyy-MM-dd'}}</span>", cellDefn: "<span>{{VX_DATA_POINT |  date:'yyyy-MM-dd'}}</span>", editDefn: ' <sample-date-picker dt="VX_DATA_POINT" vx-keep-watch="dt"></sample-date-picker>', inlineEditOnColumnEnabled: true, colClass: 'dtPickerClass' },
             { id: 'link', columnName: 'Link', renderDefn: true, width: '150', headerDefn: '<span>Link</span>', cellDefn: '<a style="padding-left:10px;" ng-href="{{VX_DATA_POINT}}" >{{VX_DATA_POINT}}</a>', inlineEditOnColumnEnabled: true, editDefn: '<input vx-keep-watch="ngModel" class="vx-edit-input form-control" ng-model="VX_DATA_POINT" ng-class=\'{ "invalidField" : VX_INVALID_ROW && VX_INVALID_FIELD_ROW  }\' ng-change="VX_CONFIG.validateLinkField(VX_ROW_POINT, VX_DATA_POINT)" />', inlineEditValidation: true },
-            { id: 'customer', columnName: 'Customer', renderDefn: false, ddSort: true, ddGroup: false, ddFilters: true, dropDownEnabled: true, inlineEditOnColumnEnabled: true, editDefn: '<input vx-keep-watch="ngModel" class="vx-edit-input form-control" ng-model="VX_DATA_POINT" />' },
+            { id: 'customer', columnName: 'Customer', renderDefn: false, ddSort: true, ddGroup: false, ddFilters: true, dropDownEnabled: true, hidden: true, inlineEditOnColumnEnabled: true, editDefn: '<input vx-keep-watch="ngModel" class="vx-edit-input form-control" ng-model="VX_DATA_POINT" />' },
+            { id: 'sampleinput', columnName: 'sample input', renderDefn: false, ddSort: true, ddGroup: true, ddFilters: true, ddFiltersWithSearch: true, dropDownEnabled: true, hidden: false, locked: false, inlineEditOnColumnEnabled: true, cellDefn: '<span>{{row.sampleInput}}</span>', editDefn: '<div ng-form="row.sampleform"><validation for="{{row.samplename}}" message="{{::row.validationMessage}}" minlimit="0" maxlimit="100"><input name="{{row.samplename}}" type="number" placeholder="Numbers Only" ng-min="0" ng-max="100" ng-model="row.sampleinput" ng-required="row.sampleRequired" style="width:100%;" /></validation></div>' },
             { id: 'engagement', columnName: 'Engagement', renderDefn: false, ddSort: true, ddGroup: true, ddFilters: true, ddFiltersWithSearch: true, dropDownEnabled: true, hidden: true, locked: false, inlineEditOnColumnEnabled: true, editDefn: '<input vx-keep-watch="ngModel" class="vx-edit-input form-control" ng-model="VX_DATA_POINT" />' },
             { id: 'assignment', columnName: 'Assignment', renderDefn: false, ddSort: true, ddGroup: false, ddFilters: true, dropDownEnabled: true, hidden: true },
             { id: 'category', columnName: 'Category', renderDefn: true, ddSort: true, ddGroup: false, ddFilters: true, dropDownEnabled: true, filterCellDefn: "<span>{{VX_DATA_POINT.name}}</span>", cellDefn: '<span>{{VX_DATA_POINT.name}}</span>', editDefn: '<select class="selectStyleSampleA" ng-options="item.name for item in row.categories" ng-model="row[\'category\']"></select>', inlineEditOnColumnEnabled: true },

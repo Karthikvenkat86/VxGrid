@@ -1,0 +1,4 @@
+﻿<div class="input-group absolute-icon" ng-class="{'valid': valid === true, 'invalid': valid === false}">
+    <span ng-transclude />
+    <button tabindex="-1" ng-if="valid != null" class="input-group-addon" uib-popover="{{message}}" popover-trigger="mouseenter" popover-placement="top" popover-append-to-body="true" style="color:#ffffff; background:#000;padding:10px;" ng-click="logstatus()">E</button>   
+</div>

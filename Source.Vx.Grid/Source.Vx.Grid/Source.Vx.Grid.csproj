@@ -66,6 +66,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dist\js\validation.directive.html" />
+    <Content Include="dist\js\validation.directive.js" />
     <Content Include="dist\min\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="dist\min\js\vx.grid.min.js" />
     <Content Include="images\1.PNG" />

@@ -1,4 +1,7 @@
-﻿.vxGridManageColMod .modal-dialog {
+﻿$color-error: #B3171C;
+$content-highlight-foreground: #25b768;
+
+.vxGridManageColMod .modal-dialog {
     height: 90vh;
     width: 90%;
     margin: 5vh auto;
@@ -1601,4 +1604,150 @@ img.vxGridAttendReqd {
     width: 18px;
     display: block;
     margin: 0 auto;
+}
+
+
+
+.absolute-icon {
+    &.input-group {
+        position: relative;
+        float: left;
+        width: 100%;
+
+        & .input-group-addon {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: transparent;
+            border-radius: 0;
+            border-color: transparent;
+            padding: 0;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            cursor: pointer;
+            line-height: 20px;
+        }
+
+        &.invalid {
+            select {
+                &::-ms-expand {
+                    width: auto !important;
+                    margin-right: 20px;
+                    text-align: right;
+                }
+            }
+        }
+    }
+}
+
+.absolute-icon {
+    &.input-group {
+        & .input-group-addon {
+            z-index: -1;
+        }
+
+        &.invalid {
+            & .input-group-addon {
+                z-index: 9;
+            }
+        }
+    }
+}
+
+.absolute-icon {
+    &.input-group {
+        .calendar-container {
+            &.input-group {
+                & .input-group-addon {
+                    z-index: 9;
+                    top: 5px;
+                    right: 5px;
+                }
+            }
+        }
+
+        &.invalid {
+            .calendar-container {
+                &.input-group {
+                    & .input-group-addon {
+                        right: 30px;
+                    }
+                }
+
+                input {
+                    padding-right: 50px;
+                }
+            }
+        }
+    }
+
+    &.icon-pos-6px {
+        .input-group-addon {
+            top: 6px;
+        }
+    }
+}
+
+.validation-icon-pos {
+    & .invalid {
+        input {
+            padding-right: 25px;
+        }
+
+        .input-group-addon {
+            top: 6px;
+        }
+    }
+}
+
+
+.invalid {
+    input, select {
+        border: 1px solid $color-error !important;
+
+        &:focus, &:hover {
+            border: 1px solid $color-error !important;
+        }
+    }
+
+    input {
+        padding-right: 30px;
+    }
+
+    select {
+        padding-right: 10px;
+    }
+
+    & .input-group-addon {
+        color: $color-error !important;
+    }
+}
+
+.valid {
+    input, select {
+        border: 1px solid $content-highlight-foreground !important;
+
+        &:focus, &:hover {
+            border: 1px solid $content-highlight-foreground !important;
+        }
+    }
+
+    & .input-group-addon {
+        color: $content-highlight-foreground !important;
+    }
+}
+
+.checkbox {
+    & .absolute-icon {
+        & .icon-glyph-703 {
+            margin-right: 2px;
+        }
+
+        &.invalid {
+            & .input-group-addon {
+                right: -25px;
+            }
+        }
+    }
 }
